@@ -1,42 +1,50 @@
 *,
 *::after,
-*::before {
-  margin: 0;
-  padding: 0;
-  box-sizing: inherit; }
+*::before { 
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
 
 html,
 body {
-  color: #676b6d;
-  font-family: 'Lato', 'Arial', sans-serif;
-  box-sizing: border-box;
-  font-size: 62.5%; }
+    color: #676b6d;
+    font-family: 'Lato', 'Arial', sans-serif;
+    box-sizing: border-box;
+    font-size: 62.5%;
+}
 
 body {
   padding: 3rem 3rem;
-  background: #424242; }
+  background: #424242;
+}
 
-li {
-  list-style: none; }
+li { 
+  list-style : none;
+}
 
 a {
-  text-decoration: none; }
+  text-decoration: none;
+}
 
 .row {
   margin: 0 auto;
-  width: 114rem; }
+  width: 114rem;
+}
 
 .codewars {
   display: flex;
   flex-direction: row;
   border-top: 1px solid grey;
-  padding-top: 2rem; }
+  padding-top: 2rem;
+}
 
 .side-bar {
   width: 25rem;
   min-height: 70rem;
   padding: 2rem 2rem 2rem 3rem;
-  background-color: rgba(0, 0, 0, 0.2); }
+  background-color: rgba(0,0,0,0.2);
+}
 
 .side-bar__header__title {
   text-align: left;
@@ -44,8 +52,9 @@ a {
   font-weight: 400;
   margin-bottom: 2rem;
   position: relative;
-  padding-left: 3.5rem; }
-  .side-bar__header__title::before {
+  padding-left: 3.5rem;
+
+  &::before {
     content: '';
     display: block;
     position: absolute;
@@ -53,91 +62,134 @@ a {
     width: 3rem;
     height: 3rem;
     background: url(http://www.softlab.ntua.gr/~nickie/images/logo/codewars.png);
-    background-size: contain; }
+    background-size: contain;
+  }
+}
 
 .level-selection {
-  font-size: 2rem; }
+  font-size: 2rem;
+}
 
 .level-selection__level {
-  margin-bottom: 1.5rem; }
-  .level-selection__level a {
+  margin-bottom: 1.5rem;
+
+  & a {
     width: 7rem;
     height: 3rem;
     color: #ffffff;
     font-weight: 300;
     font-size: 1.6rem;
     display: flex;
-    flex-direction: column; }
+    flex-direction: column;
+  }
+}
 
 .katas {
   padding: 3rem 3rem;
   width: 70rem;
   display: flex;
   flex-direction: column;
-  flex-grow: 1; }
-  .katas__kata {
+  flex-grow: 1;
+
+  &__kata {
     border-bottom: 1px solid grey;
     min-height: 15rem;
-    padding-top: 3rem; }
-    .katas__kata a {
+    padding-top: 3rem;
+
+    & a {
       color: #ffffff;
       font-size: 1.6rem;
-      font-weight: 300; }
-    .katas__kata--title, .katas__kata--solution, .katas__kata--difficulty {
-      margin-bottom: 2rem; }
-    .katas__kata--title {
-      transition: all .3s; }
-      .katas__kata--title:hover {
-        color: #6795de; }
+      font-weight: 300;
+    }
 
+    &--title,
+    &--solution,
+    &--difficulty {
+      margin-bottom: 2rem;
+    }
+
+    &--title {
+      transition: all .3s;
+
+      &:hover {
+        color: #6795de;
+      }
+    }
+  }
+}
+
+// kata
 .kata {
   color: #ffffff;
   display: flex;
   flex-direction: column;
-  padding-top: 2rem; }
-  .kata__title {
+  padding-top: 2rem;
+
+  &__hero {
+
+  }
+
+  &__title {
     font-size: 2rem;
     margin-left: 3rem;
-    margin-bottom: 2rem; }
-  .kata__description {
-    font-size: 1.7rem; }
-  .kata__form {
-    text-align: right; }
-  .kata__submit {
+    margin-bottom: 2rem;
+  }
+
+  &__description {
+    font-size: 1.7rem;
+  }
+
+  &__form {
+    text-align: right;
+  }
+
+  &__submit {
     border: none;
     background-color: #6795de;
     width: 7rem;
     height: 3rem;
     border-radius: 4px;
     margin-top: 1.7rem;
-    align-self: flex-end; }
-  .kata__content {
+    align-self: flex-end;
+  }
+
+  &__content {
     display: flex;
-    position: relative; }
-    .kata__content--editor {
+    position: relative;
+
+    &--editor {
       display: flex;
       flex-direction: column;
       padding: 3rem;
-      position: relative; }
-      .kata__content--editor .solution-label {
+      position: relative;
+
+      & .solution-label {
         position: absolute;
         top: 0px;
         font-size: 1.5rem;
         letter-spacing: .7px;
-        background-color: rgba(0, 0, 0, 0.2) !important;
+        background-color: rgba(0,0,0,0.2) !important;
         display: flex;
         justify-content: left;
         align-items: center;
         height: 3rem;
         width: 80rem;
         padding-left: 1rem;
-        font-weight: 200; }
-    .kata__content--code {
+        font-weight: 200;
+      }
+    }
+
+    &--code {
       background-color: #131414;
       width: 80rem;
       height: 30rem;
       border: none;
       color: #ffffff;
-      letter-spacing: 1px; }
-      .kata__content--code:focus {
-        outline: none; }
+      letter-spacing: 1px;
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+}

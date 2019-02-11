@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Kata</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <div class="kata row">
+      <header class="kata__hero">
+        <h1 class="kata__title"><%= kata.title %></h1>
+      </header>
+      <div class="kata__content">
+        <div class="kata__description side-bar"><%= kata.description %></div>
+        <div class="kata__content--editor">
+          <span class="solution-label">Solution :</span>
+          <textarea form="user-form" class="kata__content--code"></textarea>
+          <form action="/problems/<%= kata.id %>" id="user-form" method="post" class="kata__form">
+            <input type="submit" class="kata__submit">
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
