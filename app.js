@@ -16,6 +16,8 @@ app.use(sassMiddleware({
 	debug: true,
 }));
 
+app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use('/', index);
 
 app.set('views', __dirname + '/views');

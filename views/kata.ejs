@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Kata</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <title>CodeWars</title>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <script src="lib/codemirror.js"></script>
+    <link rel="stylesheet" href="lib/codemirror.css">
+    <script src="mode/javascript/javascript.js"></script>
   </head>
   <body>
     <div class="kata row">
@@ -13,12 +16,19 @@
         <div class="kata__description side-bar"><%= kata.description %></div>
         <div class="kata__content--editor">
           <span class="solution-label">Solution :</span>
-          <textarea form="user-form" class="kata__content--code"></textarea>
+          <textarea form="user-form" class="kata__content--code codemirror" name="solution">
+            function solution(num) {
+              if (num === 0) return 0;
+              if (num === 1) return 1;
+              return solution(num - 1) + solution(num -2);
+            }
+          </textarea>
           <form action="/problems/<%= kata.id %>" id="user-form" method="post" class="kata__form">
             <input type="submit" class="kata__submit">
           </form>
         </div>
       </div>
     </div>
+    <script src="/javascripts/index.js"></script>
   </body>
 </html>
