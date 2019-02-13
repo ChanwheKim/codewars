@@ -11,18 +11,21 @@
         <h1 class="side-bar__header__title">Kata</h1>
       
         <ul class="level-selection">
-          <li class="level-selection__level"><a href="/">All</a></li>
-          <li class="level-selection__level"><a href="/?level=1">Level 1</a></li>
-          <li class="level-selection__level"><a href="/?level=2">Level 2</a></li>
-          <li class="level-selection__level"><a href="/?level=3">Level 3</a></li>
+          <li class="level-selection__level"><a href="/"><span class="level level-all">All</span></a></li>
+          <li class="level-selection__level"><a href="/?level=1"><span class="level">Level 1</span></a></li>
+          <li class="level-selection__level"><a href="/?level=2"><span class="level">Level 2</span></a></li>
+          <li class="level-selection__level"><a href="/?level=3"><span class="level">Level 3</span></a></li>
         </ul>
       </div>
 
       <ul class="katas">
-        <% katas.forEach((kata, index) => {%>
+        <% problems.forEach((kata, index) => {%>
           <li class="katas__kata">
             <a href="problems/<%= kata.id %>">
-              <div class="katas__kata--title"><%= kata.title %></div>
+              <div class="katas__kata--title">
+                <span class="level level-small">Level <%= kata.difficulty_level %></span>
+                <p><%= kata.title %></p>
+              </div>
               <div class="katas__kata--solution">정답자: <%= kata.solution_count %>명</div>
               <div class="katas__kata--difficulty">난이도: <%= kata.difficulty_level %></div>
             </a>
@@ -30,6 +33,5 @@
         <% })%>
       </ul>
     </div>
-    <script src="/javascripts/index.js"></script>
   </body>
 </html>

@@ -6,6 +6,7 @@
     <script src="lib/codemirror.js"></script>
     <link rel="stylesheet" href="lib/codemirror.css">
     <script src="mode/javascript/javascript.js"></script>
+    <link rel="stylesheet" href="stylesheets/tomorrow-night-bright.css">
   </head>
   <body>
     <div class="kata row">
@@ -13,19 +14,30 @@
         <h1 class="kata__title"><%= kata.title %></h1>
       </header>
       <div class="kata__content">
-        <div class="kata__description side-bar"><%= kata.description %></div>
+        <div class="kata__description side-bar">
+          <span class="level side-bar__level">Level <%= kata.difficulty_level %></span>
+          <p class=""><%= kata.description %></p>
+        </div>
         <div class="kata__content--editor">
           <span class="solution-label">Solution :</span>
-          <textarea form="user-form" class="kata__content--code codemirror" name="solution">
-            function solution(num) {
-              if (num === 0) return 0;
-              if (num === 1) return 1;
-              return solution(num - 1) + solution(num -2);
-            }
-          </textarea>
+          <textarea form="user-form" class="kata__content--code codemirror" name="solution">function solution(num) {}</textarea>
           <form action="/problems/<%= kata.id %>" id="user-form" method="post" class="kata__form">
             <input type="submit" class="kata__submit">
           </form>
+          <span class="kata__result-label">Basic Test :</span>
+          <div class="kata__feedback">
+              <span class="kata__feedback--success">
+              </span>
+              <ul>
+                <% tests.forEach(test => { %>
+                  <li class="kata__feedback--detail">
+                    <ion-icon name="checkmark-circle" class="kata__feedback--icon-result"></ion-icon>
+                    <p class="kata__feedback--basic-test"><%= test.code %> should be equivalent to <%= test.solution %></p>
+                  </li>
+                <% }) %>
+              </ul>
+            </div>
+        </div>
         </div>
       </div>
     </div>

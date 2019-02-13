@@ -13,7 +13,7 @@ const bodyParser = require('body-parser');
 app.use(sassMiddleware({
 	src: path.join(__dirname, 'public'),
 	dest: path.join(__dirname, 'public'),
-	debug: true,
+	debug: false,
 }));
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -29,6 +29,7 @@ const server = app.listen(4000, function() {
 });
 
 app.use(express.static('public'));
+app.use('/problems', express.static('public'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

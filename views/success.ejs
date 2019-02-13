@@ -4,10 +4,11 @@
     <title>Kata</title>
     <link rel='stylesheet' href='/stylesheets/style.css'/>
     <script src="https://unpkg.com/ionicons@4.5.5/dist/ionicons.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,300italic' rel='stylesheet' type='text/css'>
     <script src="lib/codemirror.js"></script>
     <link rel="stylesheet" href="lib/codemirror.css">
     <script src="mode/javascript/javascript.js"></script>
-    <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,300italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="stylesheets/tomorrow-night-bright.css">
   </head>
   <body>
     <div class="kata row">
@@ -20,8 +21,8 @@
           <span class="solution-label">Solution :</span>
           <textarea form="user-form" class="kata__content--code codemirror" name="solution"><%= solution %></textarea>
           <form action="/problems/<%= kata.id %>" id="user-form" method="post" class="kata__form">
-            <input type="submit" class="kata__submit">
           </form>
+          <a href="/" class="btn-to-list"><button>리스트로 돌아가기</button></a>
           <span class="kata__result-label">Test Results :</span>
           <div class="kata__feedback">
               <span class="kata__feedback--success">
@@ -30,10 +31,10 @@
               </span>
               <ul>
                 <% tests.forEach(test => { %>
-                <li class="kata__feedback--detail">
-                  <ion-icon name="checkmark-circle" class="kata__feedback--icon-result"></ion-icon>
-                  <p><%= test.code %> === <%= test.solution %></p>
-                </li>
+                  <li class="kata__feedback--detail">
+                    <ion-icon name="checkmark-circle" class="kata__feedback--icon-result"></ion-icon>
+                    <p><%= test.code %> === <%= test.solution %></p>
+                  </li>
                 <% }) %>
               </ul>
             </div>

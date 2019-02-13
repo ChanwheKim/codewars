@@ -33,10 +33,12 @@ a {
   padding-top: 2rem; }
 
 .side-bar {
-  width: 25rem;
+  width: 32rem;
   min-height: 70rem;
   padding: 2rem 2rem 2rem 3rem;
   background-color: rgba(0, 0, 0, 0.2); }
+  .side-bar__level {
+    margin-bottom: 1.5rem; }
 
 .side-bar__header__title {
   text-align: left;
@@ -59,7 +61,8 @@ a {
   font-size: 2rem; }
 
 .level-selection__level {
-  margin-bottom: 1.5rem; }
+  margin-bottom: 1.5rem;
+  display: flex; }
   .level-selection__level a {
     width: 7rem;
     height: 3rem;
@@ -86,7 +89,10 @@ a {
     .katas__kata--title, .katas__kata--solution, .katas__kata--difficulty {
       margin-bottom: 2rem; }
     .katas__kata--title {
-      transition: all .3s; }
+      transition: all .3s;
+      display: flex;
+      flex-direction: row;
+      align-items: center; }
       .katas__kata--title:hover {
         color: #6795de; }
 
@@ -101,8 +107,13 @@ a {
     margin-bottom: 2rem; }
   .kata__description {
     font-size: 1.7rem; }
+    .kata__description.side-bar {
+      padding-left: 7px;
+      padding-right: 7px;
+      font-size: 1.4rem; }
   .kata__form {
-    text-align: right; }
+    text-align: right;
+    width: 70rem; }
   .kata__submit {
     border: none;
     background-color: #6795de;
@@ -110,7 +121,9 @@ a {
     height: 3rem;
     border-radius: 4px;
     margin-top: 1.7rem;
-    align-self: flex-end; }
+    margin-right: 1rem;
+    align-self: flex-end;
+    display: inline-block; }
   .kata__content {
     display: flex;
     position: relative; }
@@ -118,7 +131,8 @@ a {
       display: flex;
       flex-direction: column;
       padding: 3rem 3rem 0px 3rem;
-      position: relative; }
+      position: relative;
+      width: 70rem; }
       .kata__content--editor .solution-label {
         position: absolute;
         top: 0px;
@@ -129,18 +143,17 @@ a {
         justify-content: left;
         align-items: center;
         height: 3rem;
-        width: 80rem;
+        width: 70rem;
         padding-left: 1rem;
         font-weight: 300; }
     .kata__content--code {
       background-color: #131414;
-      width: 80rem;
+      width: 70rem;
       height: 35rem;
       border: none;
       color: #ffffff;
       letter-spacing: 1px;
       font-size: 1.5rem;
-      font-weight: 300;
       padding: 1.5rem 2rem; }
       .kata__content--code:focus {
         outline: none; }
@@ -153,7 +166,7 @@ a {
     justify-content: left;
     align-items: center;
     height: 3rem;
-    width: 80rem;
+    width: 70rem;
     padding-left: 1rem;
     font-weight: 300;
     margin-top: 2rem; }
@@ -161,13 +174,17 @@ a {
     padding-top: 1.5rem;
     padding-left: 1.5rem;
     background-color: #131414;
-    width: 80rem;
+    width: 70rem;
     height: 15rem;
     border: none;
     color: #ffffff;
     letter-spacing: 1px;
     position: relative;
     flex-grow: 1; }
+    .kata__feedback ul {
+      overflow: scroll; }
+    .kata__feedback--basic-test {
+      color: #676b6d; }
     .kata__feedback--success {
       font-size: 1.2rem;
       display: flex;
@@ -197,7 +214,8 @@ a {
       font-weight: 300;
       margin-bottom: 7px;
       margin-left: 2.2rem;
-      color: #67b04b; }
+      color: #67b04b;
+      line-height: 1.8rem; }
       .kata__feedback--detail p {
         display: inline-block;
         transform: translateY(-3px); }
@@ -227,3 +245,54 @@ a {
       transform: translateY(-2px); }
     .kata__failed--icon-result {
       margin-right: 3px; }
+
+.btn-to-list {
+  text-align: right;
+  width: 70rem; }
+  .btn-to-list button {
+    border: none;
+    width: 10rem;
+    height: 3rem;
+    border-radius: 4px;
+    margin-top: 1.7rem;
+    align-self: flex-end;
+    display: inline-block;
+    border: 1px solid #6795de;
+    color: #6795de;
+    background-color: transparent;
+    margin-right: 1rem;
+    transition: background-color .2s;
+    cursor: pointer; }
+    .btn-to-list button:hover {
+      background-color: #0b0c0c; }
+
+.level {
+  width: 6.5rem;
+  height: 3.5rem;
+  border: 2px solid #ecb613;
+  display: inline-block;
+  margin-right: 1rem;
+  font-size: 1.5rem;
+  color: #ecb613;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color .2s;
+  font-weight: 300; }
+  .level-all {
+    color: #ffffff;
+    border: 2px solid #ffffff; }
+    .level-all:hover {
+      background-color: #ffffff !important; }
+  .level:hover {
+    background-color: #ecb613;
+    color: rgba(20, 20, 20, 0.7);
+    font-weight: 400; }
+  .level-small {
+    width: 4.7rem;
+    height: 2.5rem;
+    font-size: 1.2rem; }
+
+.CodeMirror {
+  font-size: 1.7rem;
+  width: 70rem; }
