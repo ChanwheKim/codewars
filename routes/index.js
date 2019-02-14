@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 const mongoose = require('mongoose');
-var fs = require('fs');
 const vm = require('vm');
 
 const Problem = require('../models/Problem');
@@ -19,64 +18,62 @@ db.once('open', () => {
 
 /* GET home page. */
 router.get('/', (req, res) => {
-	fs.readFile( __dirname + '/../data/problems.json', 'utf8', (err, data) => {
-		let katas = JSON.parse(data);
-
+	Problem.find().then(problems => {
 		if (req.query.level) {
-			katas = kata.filter(kata => kata.difficulty_level === parseInt(req.query.level));
+			problems = problems.filter(kata => kata.difficulty_level === parseInt(req.query.level));
 		}
 
-		Problem.find().then(problems => {
-			res.render('index', { problems });
-		});
+		res.render('index', { problems });
 	});
 });
 
 router.get('/problems/:problem_id', (req, res) => {
-	fs.readFile( __dirname + '/../data/problems.json', 'utf8', (err, data) => {
-		const katas = JSON.parse(data);
-		const idx = parseInt(req.params.problem_id) - 1;
+	const id = req.params.problem_id;
 
-		res.render('kata', { kata: katas[idx], tests: katas[idx].tests });
-	});
+	Problem.findById(id)
+		.then(problem => {
+			res.render('kata', { problem });
+		});
 });
 
 router.post('/problems/:problem_id', (req, res) => {
-	fs.readFile( __dirname + '/../data/problems.json', 'utf8', (err, data) => {
-		const kata = JSON.parse(data).find(kata => kata.id === parseInt(req.params.problem_id));
-		const sandbox = { a: 1};
-		let result;
-		let isPassed = true;
-		const failedCase = [];
+	const id = req.params.problem_id;
 
-		try {
-			for (let i = 0; i < kata.tests.length; i++) {
-					result = vm.runInNewContext(req.body.solution + kata.tests[i].code, sandbox);
+	Problem.findById(id)
+		.then(problem => {
+			const sandbox = { a: 1 };
+			let result;
+			let isPassed = true;
+			const failedCase = [];
 
-				// 에러 처리 별도
-
-				if (result !== kata.tests[i].solution) {
-					isPassed = false;
-
-					if (result === undefined) {
-						result = 'undefined';
-					} else if (result === null) {
-						result = 'null';
+			try {
+				for (let i = 0; i < problem.tests.length; i++) {
+						result = vm.runInNewContext(req.body.solution + problem.tests[i].code, sandbox);
+	
+					// 에러 처리 별도
+	
+					if (result !== problem.tests[i].solution) {
+						isPassed = false;
+	
+						if (result === undefined) {
+							result = 'undefined';
+						} else if (result === null) {
+							result = 'null';
+						}
+	
+						failedCase.push({ test: problem.tests[i], result });
 					}
-
-					failedCase.push({ test: kata.tests[i], result });
 				}
-			}
 
-			if (isPassed) {
-				res.render('success', { kata, solution: req.body.solution, tests: kata.tests });
-			} else {
-				res.render('failure', { kata, solution: req.body.solution, failedCase });
+				if (isPassed) {
+					res.render('success', { problem, solution: req.body.solution, tests: problem.tests });
+				} else {
+					res.render('failure', { problem, solution: req.body.solution, failedCase });
+				}
+			} catch(err) {
+				res.render('error', { problem, solution: req.body.solution, errorMessage: err.message });
 			}
-		} catch(err) {
-			res.render('error', { kata, solution: req.body.solution, errorMessage: err.message });
-		}
-	});
+		});
 });
 
 module.exports = router;

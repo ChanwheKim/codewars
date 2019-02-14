@@ -13,14 +13,14 @@
   <body>
     <div class="kata row">
       <header class="kata__hero">
-        <h1 class="kata__title"><%= kata.title %></h1>
+        <h1 class="kata__title"><%= problem.title %></h1>
       </header>
       <div class="kata__content">
-        <div class="kata__description side-bar"><%= kata.description %></div>
+        <div class="kata__description side-bar"><%= problem.description %></div>
         <div class="kata__content--editor">
           <span class="solution-label">Solution :</span>
           <textarea form="user-form" class="kata__content--code codemirror" name="solution"><%= solution %></textarea>
-          <form action="/problems/<%= kata.id %>" id="user-form" method="post" class="kata__form">
+          <form action="/problems/<%= problem.id %>" id="user-form" method="post" class="kata__form">
             <input type="submit" class="kata__submit">
           </form>
           <span class="kata__result-label">Test Results :</span>
@@ -37,6 +37,7 @@
           </div>
         </div>
       </div>
+    </div>
     <script src="/javascripts/index.js"></script>
   </body>
 </html>
