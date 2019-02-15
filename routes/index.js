@@ -1,102 +1,98 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
 const mongoose = require('mongoose');
 const vm = require('vm');
-
 const Problem = require('../models/Problem');
+const { WrongEntityError, GeneralServerError } = require('../lib/error');
+const { development } = require('../config/index');
 
-mongoose.connect('mongodb://localhost:27017/codewars');
+const router = express.Router();
+
+mongoose.connect(development.DB);
 
 const db = mongoose.connection;
 
-db.on('error', () => {
-	console.log('error!!');
+db.on('error', (error) => {
+	console.warn('An error has occured while connecting.', error);
 });
+
 db.once('open', () => {
-	console.log('connected');
+	console.log('The database has been connected. :)');
 });
 
-/* GET home page. */
 router.get('/', (req, res) => {
-	Problem.find().then(problems => {
-		if (req.query.level) {
-			problems = problems.filter(kata => kata.difficulty_level === parseInt(req.query.level));
-		}
+	if (req.query.level) {
+		Problem.find({ difficulty_level: req.query.level }).then((problems) => {
+			res.render('index', { problems });
+		});
+	} else {
+		Problem.find().then((problems) => {
+			res.render('index', { problems });
+		});
+	}
+});
 
-		res.render('index', { problems });
+router.get('/problems/:problem_id', (req, res, next) => {
+	const id = req.params.problem_id;
+
+	if (!mongoose.Types.ObjectId.isValid(id)) {
+		next(new WrongEntityError());
+		return;
+	}
+
+	Problem.findById(id).then((problem) => {
+		res.render('kata', { problem });
 	});
 });
 
-router.get('/problems/:problem_id', (req, res) => {
+router.post('/problems/:problem_id', (req, res, next) => {
 	const id = req.params.problem_id;
 
-	Problem.findById(id)
-		.then(problem => {
-			res.render('kata', { problem });
-		});
-});
+	if (!mongoose.Types.ObjectId.isValid(id)) {
+		next(new WrongEntityError());
+		return;
+	}
 
-router.post('/problems/:problem_id', (req, res) => {
-	const id = req.params.problem_id;
-
-	Problem.findById(id)
-		.then(problem => {
-			const sandbox = { a: 1 };
+	try {
+		Problem.findById(id).then((problem) => {
 			let result;
 			let isPassed = true;
 			const failedCase = [];
+			const { solution } = req.body;
+			const sandbox = {
+				setTimeout: global.setTimeout,
+				setInterval: global.setInterval,
+			};
 
-			try {
-				for (let i = 0; i < problem.tests.length; i++) {
-						result = vm.runInNewContext(req.body.solution + problem.tests[i].code, sandbox);
-	
-					// 에러 처리 별도
-	
-					if (result !== problem.tests[i].solution) {
-						isPassed = false;
-	
-						if (result === undefined) {
-							result = 'undefined';
-						} else if (result === null) {
-							result = 'null';
-						}
-	
-						failedCase.push({ test: problem.tests[i], result });
+			for (let i = 0; i < problem.tests.length; i++) {
+				try {
+					result = vm.runInNewContext(solution + problem.tests[i].code, sandbox);
+				} catch (err) {
+					res.render('kata-error', { problem, solution, errorMessage: err.message });
+					return;
+				}
+
+				if (result !== problem.tests[i].solution) {
+					isPassed = false;
+
+					if (result === undefined) {
+						result = 'undefined';
+					} else if (result === null) {
+						result = 'null';
 					}
-				}
 
-				if (isPassed) {
-					res.render('success', { problem, solution: req.body.solution, tests: problem.tests });
-				} else {
-					res.render('failure', { problem, solution: req.body.solution, failedCase });
+					failedCase.push({ test: problem.tests[i], result });
 				}
-			} catch(err) {
-				res.render('error', { problem, solution: req.body.solution, errorMessage: err.message });
+			}
+
+			if (isPassed) {
+				res.render('success', { problem, solution, tests: problem.tests });
+			} else {
+				res.render('failure', { problem, solution, failedCase });
 			}
 		});
+	} catch (err) {
+		next(new GeneralServerError());
+	}
 });
 
 module.exports = router;
-
-function solution(seoul) {
-	var inx = seoul.indexOf('Kim');
-	return '김서방은 ' + inx +'에 있다';
-}
-
-function solution(n) {
-	var str = '';
-	for(var i = 1; i <= n; i++) {
-			if(i % 2 === 1) {
-					str += '수';
-			} else {
-					str += '박';
-			}
-	}
-	return str;
-}
-
-function solution(num) {
-	if (num === 0) return 0;
-	if (num === 1) return 1;
-	return solution(num - 1) + solution(num -2);
-}

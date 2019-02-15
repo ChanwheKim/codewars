@@ -1,0 +1,11 @@
+<div class="kata__description side-bar">
+  <span class="level side-bar__level">Level <%= problem.difficulty_level %></span>
+  <p class="kata__description--question"><%= problem.description %></p>
+</div>
+<div class="kata__content--editor">
+  <span class="solution-label">Solution :</span>
+  <textarea form="user-form" class="kata__content--code codemirror" name="solution">function solution(num) {}</textarea>
+  <form action="/problems/<%= problem.id %>" id="user-form" method="post" class="kata__form">
+    <input type="submit" class="kata__submit">
+  </form>
+</div>

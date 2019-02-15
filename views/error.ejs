@@ -1,43 +1,17 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Kata</title>
-    <link rel='stylesheet' href='/stylesheets/style.css'/>
-    <script src="https://unpkg.com/ionicons@4.5.5/dist/ionicons.js"></script>
-    <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,300italic' rel='stylesheet' type='text/css'>
-    <script src="lib/codemirror.js"></script>
-    <link rel="stylesheet" href="lib/codemirror.css">
-    <script src="mode/javascript/javascript.js"></script>
-    <link rel="stylesheet" href="stylesheets/tomorrow-night-bright.css">
-  </head>
-  <body>
-    <div class="kata row">
-      <header class="kata__hero">
-        <h1 class="kata__title"><%= problem.title %></h1>
-      </header>
-      <div class="kata__content">
-        <div class="kata__description side-bar"><%= problem.description %></div>
-        <div class="kata__content--editor">
-          <span class="solution-label">Solution :</span>
-          <textarea form="user-form" class="kata__content--code codemirror" name="solution"><%= solution %></textarea>
-          <form action="/problems/<%= problem.id %>" id="user-form" method="post" class="kata__form">
-            <input type="submit" class="kata__submit">
-          </form>
-          <span class="kata__result-label">Test Results :</span>
-          <div class="kata__feedback">
-            <span class="kata__feedback--failure">
-              <ion-icon name="alert" class="kata__feedback--icon-feedback-failed"></ion-icon>
-              <p class="kata__feedback--response">코드 실행 중 에러가 발생했습니다!</p>
-            </span>
-            <ul>
-              <li class="kata__failed">
-                <p class="kata__failed-result"><%= errorMessage %></p>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
+<html lang="en">
+<head>
+  <link rel='stylesheet' href='/stylesheets/style.css'/>
+  <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,300italic' rel='stylesheet' type='text/css'>
+  <title>CodeWars</title>
+</head>
+<body>
+  <div class="error row">
+    <div class=error__modal>
+      <div class="error__modal--status"><%= status %></div>
+      <div class="error__modal--message"><%= message %></div>
+      <a href="/" class="btn-to-main"><button>메인으로 돌아가기</button></a>
     </div>
-    <script src="/javascripts/index.js"></script>
-  </body>
+  </div>
+</body>
 </html>

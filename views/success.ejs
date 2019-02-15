@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Kata</title>
+    <title>CodeWars</title>
     <link rel='stylesheet' href='/stylesheets/style.css'/>
-    <script src="https://unpkg.com/ionicons@4.5.5/dist/ionicons.js"></script>
-    <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,300italic' rel='stylesheet' type='text/css'>
     <script src="lib/codemirror.js"></script>
     <link rel="stylesheet" href="lib/codemirror.css">
     <script src="mode/javascript/javascript.js"></script>
     <link rel="stylesheet" href="stylesheets/tomorrow-night-bright.css">
+    <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,300italic' rel='stylesheet' type='text/css'>
+    <script src="https://unpkg.com/ionicons@4.5.5/dist/ionicons.js"></script>
   </head>
   <body>
     <div class="kata row">
@@ -16,15 +16,11 @@
         <h1 class="kata__title"><%= problem.title %></h1>
       </header>
       <div class="kata__content">
-        <div class="kata__description side-bar"><%= problem.description %></div>
-        <div class="kata__content--editor">
-          <span class="solution-label">Solution :</span>
-          <textarea form="user-form" class="kata__content--code codemirror" name="solution"><%= solution %></textarea>
-          <form action="/problems/<%= problem.id %>" id="user-form" method="post" class="kata__form">
-          </form>
-          <a href="/" class="btn-to-list"><button>리스트로 돌아가기</button></a>
-          <span class="kata__result-label">Test Results :</span>
-          <div class="kata__feedback">
+        <%- include('appBasicForm', { problem }) %>
+        <div class="feedback-panel">
+            <a href="/" class="btn-to-list"><button>리스트로 돌아가기</button></a>
+            <span class="kata__result-label">Test Results :</span>
+            <div class="kata__feedback">
               <span class="kata__feedback--success">
                 <ion-icon name="checkmark-circle" class="kata__feedback--icon-feedback"></ion-icon>
                 <p>훌륭하군요! 정답입니다!</p>

@@ -9,7 +9,6 @@
     <div class="codewars row">
       <div class="side-bar">
         <h1 class="side-bar__header__title">Kata</h1>
-      
         <ul class="level-selection">
           <li class="level-selection__level"><a href="/"><span class="level level-all">All</span></a></li>
           <li class="level-selection__level"><a href="/?level=1"><span class="level">Level 1</span></a></li>
@@ -17,9 +16,8 @@
           <li class="level-selection__level"><a href="/?level=3"><span class="level">Level 3</span></a></li>
         </ul>
       </div>
-
       <ul class="katas">
-        <% problems.forEach((kata, index) => {%>
+        <% problems.forEach((kata) => {%>
           <li class="katas__kata">
             <a href="problems/<%= kata.id %>">
               <div class="katas__kata--title">

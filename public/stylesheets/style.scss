@@ -65,7 +65,7 @@ a {
     left: -2px;
     width: 3rem;
     height: 3rem;
-    background: url(http://www.softlab.ntua.gr/~nickie/images/logo/codewars.png);
+    background: url(/codewars.png);
     background-size: contain;
   }
 }
@@ -126,16 +126,11 @@ a {
   }
 }
 
-// kata
 .kata {
   color: #ffffff;
   display: flex;
   flex-direction: column;
   padding-top: 2rem;
-
-  &__hero {
-
-  }
 
   &__title {
     font-size: 2rem;
@@ -144,12 +139,19 @@ a {
   }
 
   &__description {
-    font-size: 1.7rem;
+    font-size: 1.3rem;
+    display: inline-block;
 
     &.side-bar {
       padding-left: 7px;
       padding-right: 7px;
       font-size: 1.4rem;
+      float: left;
+    }
+
+    &--question {
+      line-height: 150%;
+      letter-spacing: .7px;
     }
   }
 
@@ -168,14 +170,15 @@ a {
     margin-right: 1rem;
     align-self: flex-end;
     display: inline-block;
+    cursor: pointer;
   }
 
   &__content {
-    display: flex;
+    display: block;
     position: relative;
 
     &--editor {
-      display: flex;
+      display: inline-block;
       flex-direction: column;
       padding: 3rem 3rem 0px 3rem;
       position: relative;
@@ -226,6 +229,7 @@ a {
     padding-left: 1rem;
     font-weight: 300;
     margin-top: 2rem;
+    display: flex;
   }
 
   &__feedback {
@@ -233,12 +237,14 @@ a {
     padding-left: 1.5rem;
     background-color: #131414;
     width: 70rem;
-    height: 15rem;
+    height: 26rem;
     border: none;
     color: #ffffff;
     letter-spacing: 1px;
     position: relative;
     flex-grow: 1;
+    display: inline-block;
+    overflow: scroll;
 
     & ul {
       overflow: scroll;
@@ -346,6 +352,9 @@ a {
 .btn-to-list {
   text-align: right;
   width: 70rem;
+  position: absolute;
+  right: 17rem;
+  top: 33rem;
 
   & button {
     border: none;
@@ -407,4 +416,62 @@ a {
 .CodeMirror {
   font-size: 1.7rem;
   width: 70rem;
+}
+
+.feedback-panel {
+  display: inline-block;
+  width: 70rem;
+  height: 30rem;
+  padding: 1rem 3rem 0rem 3rem;
+}
+
+.error {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+
+  &__modal {
+    width: 50rem;
+    height: 30rem;
+    background-color: rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 5rem;
+    font-weight: 300;
+    box-shadow: 5px 5px 25px 0 rgba(255,255,255,.1);
+    border-radius: 5px;
+
+    &--status {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+    }
+
+    &--message {
+      font-size: 2.7rem;
+    }
+  }
+}
+
+.btn-to-main {
+  text-align: right;
+
+  & button {
+    width: 13rem;
+    height: 3.8rem;
+    border-radius: 3px;
+    background-color: transparent;
+    border: none;
+    box-shadow: 5px 5px 25px 2px rgba(255,255,255,.1);
+    color: #676b6d;
+    font-size: 1.5rem;
+    cursor: pointer;
+
+    &:focus {
+      outline: none;
+    }
+  }
 }

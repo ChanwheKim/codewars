@@ -18,22 +18,17 @@
       <div class="kata__content">
         <%- include('appBasicForm', { problem }) %>
         <div class="feedback-panel">
-            <span class="kata__result-label">Test Results :</span>
-            <div class="kata__feedback">
-              <span class="kata__feedback--failure">
-                <ion-icon name="alert" class="kata__feedback--icon-feedback-failed"></ion-icon>
-                <p class="kata__feedback--response">코드를 다시 확인해 주세요!</p>
-              </span>
-              <ul>
-                <% failedCase.forEach((result, idx) => { %>
-                  <li class="kata__failed">
-                    <ion-icon name="alert" class="kata__failed--icon-result"></ion-icon>
-                    <span class="kata__failed--test-case">Basic tests : <%= result.test.code %></span>
-                    <p class="kata__failed-result">Expected <%= result.test.solution %>, instead got <%= result.result %></p>
-                  </li>
-                <% }) %>
-              </ul>
-            </div>
+          <span class="kata__result-label">Basic Test :</span>
+          <div class="kata__feedback">
+            <span class="kata__feedback--failure">
+              <ion-icon name="alert" class="kata__feedback--icon-feedback-failed"></ion-icon>
+              <p class="kata__feedback--response">코드 실행 중 에러가 발생했습니다!</p>
+            </span>
+            <ul>
+              <li class="kata__failed">
+                <p class="kata__failed-result"><%= errorMessage %></p>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
